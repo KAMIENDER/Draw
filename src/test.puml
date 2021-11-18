@@ -1,0 +1,3 @@
+@startuml test
+state ab
+@enduml

@@ -1,0 +1,127 @@
+@startuml 整体结构
+hide empty description
+state Mutator as "Mutator\n用户程序"
+state sys as "操作系统"
+state allocator as "Allocator\n分配器" {
+    state func as "分配方法" {
+        state a1 as "线性分配器"
+        state a2 as "空闲链表分配器"
+        state a3 as "Go多级空闲链表分配器"
+        a2->a3
+    }
+    state tc as "分级分配"{
+        state size as "对象大小" {
+            state small as "微对象,<16B"
+            state norm as "小对象,16B~32kb"
+            state large as "大对象,>32kb"
+        }
+        state cache as "多级缓存" {
+            state p as "P，线程"
+            state pcache as "线程缓存(mcache)"
+            state ccache as "中心缓存(mcentral)" {
+                state desc1 as "全局对象，有锁"
+            }
+            state hcache as "页堆(mheap)"
+            pcache --> ccache : 申请内存
+            ccache --> hcache : 申请内存
+            hcache --> ccache : 持有134个
+            hcache --> sys : 申请内存
+            pcache -> p : 属于
+        }
+        hcache -> large : 分配
+        pcache -> small : 分配
+        pcache -> norm : 分配
+
+    }
+    state span as "内存管理单元(mspan)\n每个只管理特定大小的对象"
+    pcache -> span : 持有多个
+    state pos as "虚拟内存布局" {
+        state mx as "稀疏内存" {
+            state heapA as "headArena"
+            state pages as "内存页pages"
+            heapA --> pages : 一对一管理
+        }
+    }
+    hcache -> heapA : 管理二维数组
+}
+state collector as "Collector\n收集器"
+state heap as "Heap\n堆页"
+
+Mutator -> allocator
+allocator --> heap
+collector -> heap
+@enduml
+
+@startuml 管理组件结构图
+hide empty description
+state app as "用户程序"
+app --> span0 : 申请
+app --> span1 : 申请
+app --> span2 : 申请
+app --> span3 : 申请
+state pcache0 as "mcache"
+state pcache1 as "mcache"
+state pcache2 as "mcache"
+state pcache3 as "..."
+state ccache as "mcentral" {
+    state getmspan as "获取mspan"
+    state pSwept as "从清理过，包含空闲空间的mspanSet"
+    state pUnSwept as "从未清理过，包含空闲空间的mspanSet"
+    state fUnSwept as "从未清理过，不包含空闲空间的mspanSet\n会调用清理函数进行清理"
+    state grow as "从堆中申请"
+    fUnSwept -> grow
+    grow --> getmspan
+    pUnSwept -> fUnSwept
+    fUnSwept --> getmspan
+    pSwept -> pUnSwept
+    pSwept --> getmspan
+    pUnSwept --> getmspan
+}
+state hcache as "mheap" {
+    state halloc as "alloc" {
+        state reclaim as "调用reclaim方法回收内存"
+        state allocMspan as "堆上分配新的内存页以及mspan"
+        state signMspan as "将mspan加入管理的内存列表"
+        reclaim -> allocMspan
+        allocMspan -> signMspan
+    }
+    state hgrow as "grow" {
+        state fromArea as "从arena获取"
+        state fromSys as "从操作系统获取"
+        fromArea -> fromSys
+    }
+    allocMspan --> hgrow : mheap内存不足
+}
+grow --> halloc
+state span0 as "mspan" {
+    state sysp as "管理npages个内存页" {
+        state sysp0 as "8KB内存页集合"
+        state sysp1 as "8KB内存页集合"
+        state sysp2 as "8KB内存页集合"
+        state sysp3 as "..."
+    }
+    state spanClass as "spanClass，跨度类"
+}
+state span1 as "mpsan"
+state span2 as "mspan"
+state span3 as "..."
+span1 -> span0
+span0 -> span1 : 双向链表
+span1 -> span2
+span2 -> span1
+span3 -> span2
+span2 -> span3
+span0 --> pcache0 : 包含68*2个
+span1 --> pcache1 : 包含68*2个
+span2 --> pcache2 : 包含68*2个
+span3 --> pcache3 : 包含68*2个
+pcache0 --> ccache : 申请mspan(内存)
+pcache1 --> ccache : 申请mspan(内存)
+pcache2 --> ccache : 申请mspan(内存)
+pcache3 --> ccache : 申请mspan(内存)
+ccache --> hcache
+state area as "heapArea"
+state pages as "内存页"
+hcache -> area : 持有二维数组
+area --> pages : 管理
+@enduml

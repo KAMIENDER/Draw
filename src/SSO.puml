@@ -1,0 +1,13 @@
+@startuml JWT
+actor user as "用户"
+participant server as "应用"
+
+
+user -> server : 用户名密码登入
+server -> server : SHA256等算法计算加密后的secret\n与之前的secret进行比对
+server -> server : 生成JWT\n通过将用户信息、secret等信息HAMC加密后\n拼接成xxx.xxx.xxx的格式返回
+server -> user : 返回JWT
+user -> server : header中带上或者附加到请求参数
+server -> server : 校验通过
+server -> user : 提供服务
+@enduml
