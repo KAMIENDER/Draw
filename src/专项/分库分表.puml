@@ -1,0 +1,29 @@
+@startuml 数据库现状
+hide empty description
+state visit as "操作"
+state database {
+    state first as "NowMonthTable0" {
+        state data1 as "ActivityData0"
+        state data2 as "ActivityData1"
+        state data3 as "ActivityData2"
+        state datamore as "..."
+    }
+    state second as "MonthTable1" {
+        state sdata1 as "ActivityData0"
+        state sdata2 as "ActivityData1"
+        state sdata3 as "ActivityData2"
+        state sdatamore as "..."
+    }
+    state third as "MonthTable2" {
+        state tdata1 as "ActivityData0"
+        state tdata2 as "ActivityData1"
+        state tdata3 as "ActivityData2"
+        state tdatamore as "..."
+    }
+    state more as "..."
+}
+visit --> first : 占了绝大部分
+visit --> second : 小部分
+visit --> third : 小部分
+visit --> more : 小部分
+@enduml
