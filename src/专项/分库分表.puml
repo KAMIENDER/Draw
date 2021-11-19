@@ -1,5 +1,6 @@
 @startuml 数据库现状
 hide empty description
+left to right direction
 state visit as "操作"
 state database {
     state first as "NowMonthTable0" {
@@ -26,4 +27,25 @@ visit --> first : 占了绝大部分
 visit --> second : 小部分
 visit --> third : 小部分
 visit --> more : 小部分
+@enduml
+
+@startuml 按月分库
+hide empty description
+state op as "操作"
+state db1 {
+   state NowMonth
+   state Month1
+   state Month2
+}
+state db2 {
+   state Month3 as "Month"
+   state Month4 as "Month"
+   state Month5 as "Month"
+}
+op --> NowMonth : 绝大部分
+op --> Month1 : 小部分
+op --> Month2 : 小部分
+op --> Month3 : 小部分
+op --> Month4 : 小部分
+op --> Month5 : 小部分
 @enduml
