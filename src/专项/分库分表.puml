@@ -49,3 +49,28 @@ op --> Month3 : 小部分
 op --> Month4 : 小部分
 op --> Month5 : 小部分
 @enduml
+
+@startuml 按活动分库
+hide empty description
+state op as "操作"
+state db1 {
+   state NowMonth {
+       state activity1 #LightCyan
+   }
+   state Month1
+   state Month2
+}
+state db2 {
+   state Month3 as "NowMonth" {
+       state activity2 #LightCyan
+   }
+   state Month4 as "Month1"
+   state Month5 as "Month2"
+}
+op --> NowMonth : 大部分
+op --> Month1 : 小部分
+op --> Month2 : 小部分
+op --> Month3 : 大部分
+op --> Month4 : 小部分
+op --> Month5 : 小部分
+@enduml
