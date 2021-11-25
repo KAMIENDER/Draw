@@ -74,3 +74,49 @@ op --> Month3 : 大部分
 op --> Month4 : 小部分
 op --> Month5 : 小部分
 @enduml
+
+@startuml 单数据操作流量图
+hide empty description
+state op as "用户操作"
+state service as "业务应用"
+state db as "分片库" #LightPink {
+    state proxy
+    state mysql0
+    state mysql1
+    state mysql2
+    proxy --> mysql0 : 分库策略
+    proxy --> mysql1 : 分库策略
+    proxy --> mysql2 : 分库策略
+}
+op -> service
+service -> proxy : 带上分库key
+@enduml
+
+@startuml 多数据操作流量图
+hide empty description
+state op as "用户操作"
+state service as "业务应用" {
+    state ops as "拆分成多个单库操作"
+    state trans as "业务保证事务性质"
+    state op1 as "分片键1"
+    state op2 as "分片键2"
+    state op3 as "分片键3"
+    ops -> trans
+    trans --> op1
+    trans --> op2
+    trans --> op3
+}
+state db as "分片库" #LightPink {
+    state proxy
+    state mysql0
+    state mysql1
+    state mysql2
+    proxy --> mysql0 : 分库策略
+    proxy --> mysql1 : 分库策略
+    proxy --> mysql2 : 分库策略
+}
+op -> service
+op1 --> proxy : 带上分库key
+op2 --> proxy : 带上分库key
+op3 --> proxy : 带上分库key
+@enduml
