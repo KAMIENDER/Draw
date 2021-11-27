@@ -1,0 +1,34 @@
+@startuml 冷热数据迁移过程
+hide empty description
+state start as "应用写入"
+state db as "分片库" #LightPink {
+    state db1 as "分片0"
+    state db2 as "分片1"
+    state mysql0 as "实例0\n存储较热数据"
+    state mysql1 as "实例1\n存储较冷数据"
+    start --> db1 : 分库键
+    db1 --> mysql0 : 写入
+    mysql0 --> mysql1 : 逐步迁移
+}
+@enduml
+
+@startuml 冷热数据更换实例
+hide empty description
+state start as "应用写入"
+state query as "应用查询"
+state db as "分片库" #LightPink {
+    state db1 as "分片0"
+    state db2 as "分片1"
+    state mysql0 as "实例0\n存储较热数据"
+    state mysql1 as "实例1\n存储较冷数据"
+    state mysql2 as "实例2\n存储较冷数据"
+    start --> db1 : 分库键
+    db1 --> mysql0 : 写入
+    mysql0 --> mysql2 : 逐步迁移
+
+    query -[#LightSeaGreen]-> db1 : 分库键
+    db1 -[#LightSeaGreen]-> mysql0 : 冷热分离键
+    db1 -[#LightSeaGreen]-> mysql1 : 冷热分离键
+    db1 -[#LightSeaGreen]-> mysql2 : 冷热分离键
+}
+@enduml
