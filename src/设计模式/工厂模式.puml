@@ -1,0 +1,18 @@
+@startuml 工厂模式
+hide empty description
+state user as "调用方"
+state condition as "条件" #LightPink
+state interface as "对象接口(抽象)" #LightBlue
+state factory as "工厂"
+state class as "接口实现" {
+    state sub0 as "实现0"
+    state sub1 as "实现1"
+}
+
+user -up-> condition
+condition -> factory
+factory -left-> interface
+interface -left-> user
+factory -right-> class : 根据条件构建
+class -up->o interface : 实现
+@enduml
