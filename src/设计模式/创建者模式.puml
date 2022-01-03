@@ -1,0 +1,27 @@
+@startuml 创建者模式
+hide empty description
+state user as "调用者"
+state condition as "调用不同方法获取\n抽象不同实现"
+state builder as "创建者" {
+    state sub0 as "实现0" #LightCoral
+    state sub1 as "实现1" #LightCoral
+    state item0 as "传入参数0" #LightBlue
+    state item1 as "传入参数1" #LightBlue
+    state target as "进行目标实现组织、构建"
+    state interface as "入参interface" #LightCyan
+    state out_inter as "出参抽象" #LightCyan
+}
+
+user -right-> condition
+condition -right-> builder
+item0 -down-> target
+item1 -up-> target
+item0-down->o interface
+item1 -up->o interface 
+target -up->sub0
+target -down->sub1
+sub0 -> user
+sub1 -> user
+sub0 -down->o out_inter
+sub1 -up->o out_inter
+@enduml
