@@ -1,0 +1,17 @@
+@startuml 过滤器模式
+hide empty description
+state user as "调用方"
+state ent_inter as "可过滤对象接口" #LightBlue
+state fliter as "过滤器实现" #LightPink
+state ent as "可过滤对象实现" #LightPink
+state fliter_inter as "过滤器接口" #LightBlue {
+    state flit as "过滤函数" 
+}
+
+user -up-> ent : 数组
+ent -up->o ent_inter
+ent -right-> fliter
+fliter -up->o fliter_inter
+ent_inter -> fliter_inter : 函数参数
+fliter -> user : 完成过滤
+@enduml
