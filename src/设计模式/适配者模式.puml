@@ -1,0 +1,16 @@
+@startuml 适配者模式
+hide empty description
+state user as "调用方需要新结构（功能）"
+state new_inter as "new interface" #LightCyan
+state new_class as "adapter" #LightPink
+state old as "旧对象、功能、接口" {
+    state old_inter as "old interface" #LightCyan
+    state old_class as "old class" #LightPink
+}
+
+user -right-> new_class : 需要
+new_class -up->o new_inter
+old -left-> new_class : 继承
+old -left-> new_class : 属性
+old_class -up->o old_inter
+@enduml
