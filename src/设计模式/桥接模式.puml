@@ -1,0 +1,17 @@
+@startuml 桥接模式
+hide empty description
+state user as "调用方"
+state out_inter as "外部抽象" #LightBlue
+state in_inter as "内部抽象" #LightBlue
+state out_class as "外部实现" #LightPink {
+    state sub_class as "内部成员"
+}
+state in_class as "内部实现" #LightPink
+
+out_inter -left-> in_inter : 初始化函数依赖
+out_class -up->o out_inter
+sub_class -up->o in_inter
+user -right-> in_class
+in_class -up->o in_inter
+in_class -right-> sub_class
+@enduml
