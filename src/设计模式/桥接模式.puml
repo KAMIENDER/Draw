@@ -1,4 +1,5 @@
 @startuml 桥接模式
+
 hide empty description
 state user as "调用方"
 state out_inter as "外部抽象" #LightBlue
