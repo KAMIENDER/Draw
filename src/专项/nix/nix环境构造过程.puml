@@ -1,0 +1,9 @@
+@startuml nix环境构造过程
+scale 350 width
+.nix: 使用nix表达式
+.drv: 描述包的基本信息
+state "/nix/store/..." as c
+c: 构建好的最终位置
+.nix --> .drv : compile
+.drv --> c : 通过输入的builder进行构建
+@enduml

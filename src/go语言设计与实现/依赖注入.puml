@@ -1,0 +1,16 @@
+@startuml DI
+hide empty description
+state "服务实例" as a
+state "底层配置" as b
+a -> b : 依赖
+@enduml
+
+@startuml 依赖倒置
+hide empty description
+state "服务实例" as a
+state "底层配置" as b
+state "配置接口" as c
+c-->o a : 被定义 
+a -> b : 依赖
+b --> c : 实现
+@enduml

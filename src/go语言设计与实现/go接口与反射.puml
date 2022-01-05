@@ -1,0 +1,53 @@
+@startuml 结构转interface
+hide empty description
+
+state struct_type
+state Struct {
+    state data
+    state func_pointer
+}
+state function
+func_pointer --> function
+state data_new as "data"
+state iface {
+    state i_pointer as "data unsafe.Pointer"
+    state itab {
+        state i_type as "inter *interfacetype"
+        state type as "_type *_type"
+        state func
+        func --> function
+    }
+}
+Struct -->o struct_type
+type -->o struct_type
+i_pointer --> data_new
+data -->o data_new : create new space and copy
+@enduml
+
+@startuml 反射转换过程
+hide empty description
+state variable
+state reflect_object{
+    state Type
+    state Value
+    state elem as ".elem()"
+}
+state reflect.TyopeOf
+state reflect.ValueOf
+variable --> reflect.TyopeOf : as interface
+variable -> reflect.ValueOf : as interface
+reflect.TyopeOf --> Type : convert interface to emptyInterface
+reflect.ValueOf --> Value : convert interface to emptyInterface
+Value --> elem : 当变量为指针的时候，通过这种方式获取指向的变量
+@enduml
+
+@startuml 反射第二法则
+hide empty description
+state reflect.Value
+state func as ".Interface()"
+state interface
+state variable
+reflect.Value -> func
+func -> interface
+interface -> variable : 显示类型转换
+@enduml

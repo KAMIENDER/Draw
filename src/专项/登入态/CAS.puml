@@ -1,0 +1,42 @@
+@startuml CAS
+actor user
+participant sysa as "系统A"
+participant sysb as "系统B"
+participant register as "认证中心"
+
+user -> sysa : 访问
+sysa --> register : 重定向
+register -->  user : 身份认证
+user -> register : 完成认证
+register --> register : 注册用户信息，在认证域名下种入cookie
+register --> sysa : 重定向，携带ticket作为回调参数
+sysa --> register : 验证ticket有效性
+register --> sysa : 通过
+sysa --> sysa : 注册用户信息，创建session
+sysa --> sysa : 重定向到用户开始访问的界面
+
+user -> sysb : 访问
+sysb --> register : 重定向，携带认证域名cookie
+register --> register : 用户已认证
+register --> sysb : 重定向，携带ticket作为参数
+sysb --> register : 验证ticket有效性
+register --> sysb : 通过
+sysb --> sysb : 注册用户信息，创建session
+sysb --> sysb : 重定向到用户访问界面
+@enduml
+
+@startuml OAuth2.0
+actor user
+participant sysa as "应用"
+participant server as "授权服务器"
+
+sysa -> server : 注册应用
+user -> sysa : 使用服务
+sysa -> server : 重定向，申请权限
+server -> user : 授权确认
+user -> server : 确认
+server -> sysa : 重定向，附上ticket
+sysa -> server : 带上ticket以及自己的应用信息，获取资源
+server -> server : 验证ticket有效性
+server -> sysa : 返回资源
+@enduml

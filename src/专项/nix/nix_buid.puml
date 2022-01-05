@@ -1,0 +1,35 @@
+@startuml nix_build
+hide empty description
+state nixpkgs: 通过继承的方式可以使用nixpkgs里面的依赖
+state ".nix" as a {
+    state name: .drv名称
+    state builder: 为shell构建脚本
+    state system: 所使用的系统
+    state "other_key_value_map" as map: 一些其他输入的键值对
+}
+nixpkgs ->o map
+state "drivation_describe" as b {
+
+}
+b: 输出依赖的描述，包含构建所需要的所有信息
+a --> b: compile
+state "outpath" as c: .drv转字符串时会输出outpath
+b --> c: build:将.drv中的所有键值对export到环境中，\n builder在进行构建的时候能够通过环境变量的形式进行使用
+@enduml
+
+
+@startuml build
+hide empty description
+state nixpkgs: 通过继承的方式可以使用nixpkgs里面的依赖
+state build {
+    state args: 使用=连接的键值对
+    state "builder" as b2: 可以使用环境变量进行构建
+    args --> b2: set到环境变量中
+}
+nixpkgs ->o args
+state out: 我们需要的环境或者包
+build -> out: 构建到${out}
+state nar: 整个生成的.drv环境的压缩备份，\n可以进行还原
+out --> nar: nix-stroe --dump
+nar --> out: nix-stroe --restore
+@endeml
