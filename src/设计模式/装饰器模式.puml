@@ -1,0 +1,17 @@
+@startuml 装饰器模式（函数闭包）
+hide empty description
+state user as "调用方"
+state func as "装饰器函数"
+
+state ori_inter as "被装饰函数抽象" #LightBlue
+state ori_class as "被装饰函数" #LightPink
+state new_class as "装饰后函数" #LightPink
+
+user -up-> ori_class
+ori_class -up->o ori_inter
+ori_class -right-> func
+new_class -up->o ori_inter
+ori_inter -down-> func : 参数、返回值
+func -left-> new_class
+new_class -left-> user
+@enduml
