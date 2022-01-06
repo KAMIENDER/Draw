@@ -15,3 +15,19 @@ ori_inter -down-> func : 参数、返回值
 func -left-> new_class
 new_class -left-> user
 @enduml
+
+@startuml 装饰器模式（子成员）
+hide empty description
+state user as "调用方"
+state sub_inter as "被装饰接口" #LightBlue
+state dec_class as "装饰类" #LightPink {
+    state sub_class as "子成员类"
+}
+state ori_class as "原始类" #LightPink
+
+user -right-> ori_class
+ori_class -up->o sub_inter
+ori_class -down-> sub_class
+dec_class -up->o sub_inter
+dec_class -up-> user
+@enduml
