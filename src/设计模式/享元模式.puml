@@ -1,0 +1,20 @@
+@startuml 享元模式
+hide empty description
+state user as "调用方"
+state input as "参数"
+
+state inter as "对象接口" #LightBlue
+state factory as "享元工厂" {
+    state hashmap as "共用属性缓存"
+    state class0 as "实现0" #LightPink
+    state class1 as "实现1" #LightPink
+}
+
+user -right-> input
+input -down-> factory
+hashmap -up-> class0 : 共用不变属性
+hashmap -> class1 : 共用不变属性
+class0 -up->o inter
+class1 -up->o inter
+factory -> user
+@enduml
