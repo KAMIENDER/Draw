@@ -1,0 +1,19 @@
+@startuml 备忘录模式
+hide empty description
+state mark_inter as "记录抽象" #LightBlue
+state marker as "备忘录对象" {
+    state add as "添加备忘录"
+    state get as "获取备忘录"
+}
+state class as "对象" {
+    state getmark as "获取状态记录"
+    state setmark as "设置状态"
+}
+state mark_class0 as "记录对象" #LightPink
+
+getmark -[#LightGreen]down-> mark_class0
+mark_class0 -[#LightGreen]down-> add
+get -[#LightCoral]up-> mark_class0
+mark_class0 -[#LightCoral]up-> setmark
+mark_class0 -right->o mark_inter
+@enduml
