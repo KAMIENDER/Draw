@@ -1,0 +1,19 @@
+@startuml 中介者模式
+hide empty description
+state user as "调用方"
+state sub_class0 as "被管理对象0" #LightPink {
+    state commu as "中介者属性"
+}
+state sub_class1 as "被管理对象1" #LightPink {
+    state commu1 as "中介者属性"
+}
+state mid as "中介者对象"
+
+user -up-> mid : 创建
+user -> sub_class0 : 创建
+user -down-> sub_class1 : 创建
+mid -> commu : 初始化属性
+mid -> commu1 : 初始化属性
+user -[#LightGreen]-> sub_class0 : 与1交互
+commu -[#LightGreen]right-> commu1
+@enduml
