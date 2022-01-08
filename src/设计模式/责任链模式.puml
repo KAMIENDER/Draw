@@ -1,0 +1,22 @@
+@startuml 责任链模式
+hide empty description
+state user as "调用方"
+state inter as "接收对象抽象" #LightBlue
+state deal_inter as "接收者抽象" #LightBlue
+state class as "接收对象" #LightPink
+state deal0 as "接收者" {
+    state logic as "当前处理逻辑"
+    state next as "下一个接收者" #LightPink
+}
+state deal1 as "下一个接收者" #LightPink
+
+user -> deal1
+deal1 -down-> next : 初始化
+user -down-> class
+class -down-> logic
+logic -down-> next
+class -right->o inter
+deal0 -left->o deal_inter
+deal1 -left->o deal_inter
+next -left->o deal_inter
+@enduml
