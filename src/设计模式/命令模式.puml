@@ -1,0 +1,20 @@
+@startuml 命令模式
+hide empty description
+state user as "调用方"
+state command_inter as "命令抽象" #LightBlue {
+    state func as "excute()"
+}
+state factory as "命令工厂"
+state command as "命令" #LightPink
+state excutor as "接收者" {
+    state add as "添加命令"
+    state logic as "执行命令列表\n(调用命令的excute)"
+}
+
+user -up-> factory : 获取命令
+factory -down-> user : 返回命令
+user -> command
+command -> add : 添加命令
+command -up->o command_inter
+user -up-> logic : 开始执行命令
+@enduml
