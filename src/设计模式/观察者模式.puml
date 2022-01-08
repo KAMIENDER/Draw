@@ -1,0 +1,25 @@
+@startuml 观察者模式
+hide empty description
+state sub_inter as "被依赖抽象" #LightBlue {
+    state attach as "attach()\n(增加被通知对象)"
+    state setState as "setState()\n(更新状态)"
+}
+state sub_class as "被依赖对象a" #LightPink
+state observer_inter as "被通知者抽象" #LightBlue {
+    state update as "update()"
+}
+state oberser0 as "被通知对象0" #LightPink {
+    state a0 as "依赖属性"
+}
+state oberser1 as "被通知对象1" #LightPink {
+    state a1 as "依赖属性"
+}
+
+sub_class -[#LightGreen]down-> a0 : 初始化被依赖
+sub_class -[#LightGreen]down-> a1 : 初始化被依赖
+sub_class -right->o sub_inter
+oberser0 -[#LightGreen]up-> sub_class : 增加依赖
+oberser1 -[#LightGreen]up-> sub_class : 增加依赖
+oberser0 -down->o observer_inter
+oberser1 -down->o observer_inter
+@enduml
