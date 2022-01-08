@@ -1,0 +1,22 @@
+@startuml 迭代器模式
+hide empty description
+state user as "调用者"
+state container_inter as "集合抽象" #LightBlue {
+    state func as "getIterator()"
+}
+state iterator_inter as "迭代器抽象" #LightBlue {
+    state hasNext as "hasNext()"
+    state getNext as "getNext()"
+}
+
+state container as "集合实现" #LightPink
+state iter as "集合迭代器实现" #LightPink
+state for as "for in"
+
+user -> for
+for -> container
+container -left-> iter
+iter -left-> for
+container -up->o container_inter
+iter -up->o iterator_inter
+@enduml
