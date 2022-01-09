@@ -1,0 +1,17 @@
+@startuml 模板模式
+hide empty description
+state template as "模板抽象" #LightBlue {
+    state main as "主流程\nmain"
+    note right of main : def main:\n func0()\n func1()
+    state func0 as "func0"
+    state func1 as "func1"
+}
+state sub0 as "子类0" #LightPink {
+    state new_func0 as "重写func0"
+}
+state sub1 as "子类1" #LightPink {
+    state new_func1 as "重写func1"
+}
+sub0 -up->o template
+sub1 -up->o template
+@enduml
