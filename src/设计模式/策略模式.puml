@@ -1,0 +1,22 @@
+@startuml 策略模式
+hide empty description
+state user as "调用方"
+state context as "上下文\n(context)" {
+    state getState as "getState()"
+    state setState as "setState()"
+}
+state com_inter as "策略抽象" #LightBlue {
+    state excute as "excute()"
+}
+state com0 as "策略0" #LightPink
+state com1 as "策略1" #LightPink
+state proxy as "策略选择类"
+
+user -down-> context
+context -right-> proxy
+proxy -> getState
+proxy -> com0
+com0 -up-> user
+com0 -right->o com_inter
+com1 -up->o com_inter
+@enduml
