@@ -1,0 +1,23 @@
+@startuml 访问者模式
+hide empty description
+state user as "调用方"
+state ele_inter as "元素抽象" #LightBlue
+state ele as "元素集合类" {
+    state eles as "元素列表" #LightPink
+    state inter_visitor as "内部访问者\nvisitor" #LightPink
+    state main as "主要流程"
+    note right of main : def main:\n for element in self.elements:\n  self.visitor.visit(elemnet)
+}
+state visitor_inter as "访问者抽象" #LightBlue {
+    state visit as "visit()"
+}
+state visitor as "访问者" #LightPink
+
+user -> visitor
+visitor -down-> inter_visitor
+inter_visitor -> main
+eles -up-> main
+eles -down->o ele_inter
+visitor -up->o visitor_inter
+inter_visitor -up->o visitor_inter
+@enduml
