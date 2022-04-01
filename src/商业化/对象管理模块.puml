@@ -1,0 +1,111 @@
+@startuml 对象管理模块-查询请求
+hide empty description
+state modelP as "模块" #LightBlue
+state subModel as "子模块" #LightCyan
+state subzu as "组件" #LightPink
+state op as "操作"
+state out as "外部模块" #LightBlue
+state model as "对象管理模块" #LightBlue {
+    state api as "API层" #LightCyan
+    state queyEngine as "对象查询引擎" #LightCyan {
+        state systemQuery as "系统预置对象查询器" #LightPink {
+            state queryAnalyze as "查询条件解析\n构建表达式"
+            state getTableInfo as "获取表信息"
+            state quey as "查询数据"
+            state facade as "查询结果转换PO转DO"
+        }
+        state customQuery as "自定义对象查询器" #LightPink {
+            state queryAnalyzeP as "查询条件解析\n获取查询Field"
+            state queryChecker as "查询校验器" {
+                state getMetaInfo as "获取元数据信息"
+                state check as "检查查询\nField合法性"
+            }
+            state buildQuery as "构建表达式"
+            state queyC as "大宽表查询数据"
+            state facadeC as "查询结果结合元数据\n转换PO转DO"
+        }
+    }
+    state writeEngine as "对象写入引擎" #LightCyan {
+        state systemWrite as "系统预置对象写入器" #LightPink {
+            state facadeW as "转换DO到PO"
+            state getTableInfoW as "获取对象表信息"
+            state write as "写入数据"
+        }
+        state customWrite as "自定义对象写入器" #LightPink {
+            state writeChecker as "写入校验器" {
+                state getMetaInfoW as "获取对象元数据信息"
+                state checkW as "检查对象Field数值合法性"
+            }
+            state facadeWC as "转换DO到PO"
+
+            state writer as "事务"{
+                state transcationS as "开始事务"
+                state writeCW as "写入数据"
+                state search as "写入索引数据"
+                state transcationE as "结束事务"
+            }
+        }
+    }
+    state metaQueryEngine as "元数据查询引擎" #LightCyan {
+        state queryM as "查询元数据"
+        state queryF as "查询元数据Field"
+        state facadeM as "元数据PO转DO"
+    }
+    state metaWriteEngine as "元数据写入引擎" #LightCyan {
+        state facadeMW as "元数据DO转PO"
+        state MWriter as "事务" #LightPink {
+            state transcationSM as "开始事务"
+            state writeF as "写入元数据Field"
+            state writeM as "写入元数据"
+            state transcationEM as "结束事务"
+        }
+    }
+}
+
+out --> model
+model --> api
+api --> queyEngine : 对象数据查询
+queyEngine --> systemQuery : 系统预置对象查询
+queyEngine --> customQuery : 自定义对象查询
+
+
+systemQuery --> queryAnalyze
+queryAnalyze --> getTableInfo
+getTableInfo --> quey
+quey --> facade
+
+customQuery --> queryAnalyzeP
+queryAnalyzeP --> getMetaInfo
+getMetaInfo --> check
+check --> buildQuery
+buildQuery --> queyC
+queyC --> facadeC
+
+api --> writeEngine : 对象数据写入
+writeEngine --> systemWrite : 系统预置对象写入
+writeEngine --> customWrite : 自定义对象写入
+systemWrite --> facadeW
+facadeW --> getTableInfoW
+getTableInfoW --> write
+
+customWrite --> getMetaInfoW
+getMetaInfoW --> checkW
+checkW --> facadeWC
+facadeWC --> transcationS
+transcationS --> writeCW
+writeCW --> search
+search --> transcationE
+
+api --> metaQueryEngine : 元数据查询
+metaQueryEngine --> queryM
+queryM --> queryF
+queryF --> facadeM
+
+api --> metaWriteEngine : 元数据写入
+metaWriteEngine --> facadeMW
+facadeMW --> transcationSM
+transcationSM --> writeF
+writeF --> writeM
+writeM --> transcationEM
+
+@enduml
