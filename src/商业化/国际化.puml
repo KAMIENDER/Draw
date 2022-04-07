@@ -1,0 +1,123 @@
+@startuml 系统文案国际化
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+state front as "前端页面\n获取所有发薪期间模版" #White
+state middleware as "中间件\n提取header 设置语言进ctx" #White
+state model as "规则设置模块" #White {
+    state api as "api层" #LightCyan
+    state get_period as "获取发薪期间模版" #LightCyan
+    state error as "发生错误" #LightCyan
+    state error_dail as "错误处理" #LightCyan
+}
+state translate_sdk as "国际化sdk" #White
+
+front --> middleware : page-language
+middleware --> model : ctx
+model --> api
+api --> get_period
+get_period --> error : 查询出错
+error -up-> error_dail : 错误处理
+error_dail --> translate_sdk : ctx, i18nKey, 文案参数
+translate_sdk --> error_dail : 返回错误文案
+error_dail -up-> front : 返回错误文案
+@enduml
+
+@startuml 系统文案国际化sdk
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+state other as "外部模块" #White
+state init as "初始化" #White
+state translate as "国际化服务" #White {
+    state get_language as "获取语言" #LightCyan
+    state sdk as "starling sdk" #LightCyan {
+        state getMsg as "获取文案" #LightGray
+        state getPacakge as "获取语言包\n本地缓存" #LightGray
+    }
+    state doudi as "本地文案兜底" #LightCyan
+    state analyze as "解析文案\n填入参数" #LightCyan
+}
+
+other -right-> get_language : ctx, i18nKey, 文案参数
+get_language --> getMsg
+getMsg --> analyze : 成功获取
+getMsg --> doudi : 失败走本地文案
+doudi --> analyze
+analyze -left-> other : 翻译后文案
+init --> getPacakge : 初始化
+@enduml
+
+@startuml 用户自定义文案国际化
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+state setting as "设置模块" #White
+state persistent as "存储层" #White {
+    state query as "查询算薪项" #LightCyan
+    state i18nPO as "国际化PO" #LightCyan {
+        state hook as "国际化查询钩子" #LightGray
+    }
+}
+state db as "数据库" #White
+
+setting --> query : ctx, 查询条件
+query --> hook : ctx
+hook --> db : 查询
+@enduml
+
+@startuml 插件sdk
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+state persistent as "persistent层" #White
+state plug as "国际化插件" #White {
+    state analyze as "解析model是否有i18n tag" #LightCyan
+    state context as "是否需要进行翻译" #LightCyan
+    state preLoader as "采用preload的方式进行连表" #LightCyan
+}
+state db as "数据库" #White
+
+persistent --> analyze
+analyze --> context
+context --> preLoader
+preLoader --> db : 顺带查询国际化文案
+db -up-> persistent
+@enduml
+
+@startuml scope国际化
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+state persistent as "persistent层" #White {
+    state getDB as "获取db" #LightCyan
+    state query as "persistent层操作" #LightCyan
+}
+state i18n as "国际化组件" #White {
+    state context as "是否需要进行翻译" #LightCyan
+    state preload as "进行连表preload" #LightCyan
+    state dbinit as "返回国际化db" #LightCyan
+}
+state db as "数据库" #White
+
+getDB -right-> context
+context --> preload
+preload --> dbinit
+dbinit -left-> query
+query --> db
+db -up-> query
+
+@enduml
