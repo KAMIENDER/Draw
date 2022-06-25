@@ -1,0 +1,40 @@
+@startuml XA
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+participant TM
+participant RM0
+participant RM1
+
+group 事务执行成功
+group 一阶段
+TM -> RM0 :执行操作0
+RM0 -> TM :执行成功
+TM -> RM1 :执行操作1
+RM1 -> TM :执行成功
+end
+
+group 二阶段
+TM -> RM0 :提交事务
+TM -> RM1 :提交事务
+end
+end
+
+group 事务执行失败
+group 一阶段
+TM -> RM0 :执行操作0
+RM0 -> TM :执行成功
+TM -> RM1 :执行操作1
+RM1 -> TM :执行失败
+end
+
+group 二阶段
+TM -> RM0 :回滚操作0
+TM -> RM1 :回滚操作1
+end
+end
+
+@enduml

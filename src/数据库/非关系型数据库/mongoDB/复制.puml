@@ -1,0 +1,15 @@
+@startuml 复制与冗余
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+state set as "replica set (副本集)" #White {
+    state arbiter as "arbiter node (仲裁节点)" #LightCyan;line.dotted;
+    state data as "data nodes (数据节点)" #LightCyan {
+        state main_data as "main data node (主节点)" #LightGreen
+        state secondary_data as "secondary data node (备份节点)" #LightGreen
+    }
+}
+@enduml
