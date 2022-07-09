@@ -1,0 +1,25 @@
+@startuml ODM事务设计
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+participant 下游业务 as down
+participant ODM
+
+down -> down :调用SDK开启事务
+down -> ODM :创建RelatedObjectID为1的依赖
+ODM -> ODM :上下游对象上锁A
+ODM -> ODM :创建依赖
+ODM -> down :创建成功
+
+down -[#Red]-> ODM :创建RelatedObjectID为2的依赖
+ODM -> ODM :上下游对象上锁B
+ODM -> ODM :创建依赖
+ODM -> down :依赖创建成功
+
+down -[#Red]-> down :事务提交
+down -> ODM :Confirm Or Cancel
+ODM -> ODM :解锁A、B
+@enduml

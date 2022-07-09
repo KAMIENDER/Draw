@@ -1,0 +1,37 @@
+@startuml XA
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+participant TM
+participant TC
+participant RM0
+participant RM1
+
+group 开始事务
+TM -> TC :开启事务
+TC -> TM :注册成功
+end
+group 执行事务分支1
+TM -> TC :Try业务操作1\n开启分支事务1
+TC -> TC :更新分支事务1状态为执行中
+TC -> RM0 :执行Try操作
+RM0 -> TC :执行成功
+TC -> TC :更新事务分支1状态
+TC -> TM :Try1成功
+end
+group 执行事务分支2
+TM -> TC :Try业务操作2\n开启分支事务2
+TC -> TC :更新分支事务2状态为执行中
+TC -> RM1 :执行Try
+RM1 -> TC :执行失败
+TC -> TC :重试多次后回滚事务
+end
+group 回滚或提交
+TC -> RM0 :Cancel0
+RM0 -> TC :Cancel成功
+TC -> TM :回滚事务
+end
+@enduml
