@@ -1,0 +1,33 @@
+@startuml Saga
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+participant TM
+participant TC
+participant RM0
+participant RM1
+
+group 开始事务
+TM -> TC :开启事务
+TC -> TM :注册成功
+end
+group 执行事务节点1
+TC -> TC :更新分支事务1状态为执行中
+RM0 -> TC :执行事务节点1
+TC -> TC :更新事务分支1状态
+TC -> TM :事务节点1执行成功
+end
+group 执行事务节点2
+TC -> TC :更新分支事务2状态为执行中
+RM0 -> TC :执行事务节点2
+TC -> TC :更新事务分支2状态
+TC -> TM :事务节点2执行成功
+end
+group 任何节点失败时
+TC -> RM0 :回滚事务
+TC -> RM1 :回滚事务
+end
+@enduml
