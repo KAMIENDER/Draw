@@ -31,3 +31,29 @@ TC -> RM0 :回滚事务
 TC -> RM1 :回滚事务
 end
 @enduml
+
+@startuml 半消息
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+participant ServiceA as a
+participant MQ
+participant ServiceB as b
+
+a -> a :开启事务
+a -> a :执行业务逻辑
+group 发送半消息
+a -> MQ :发送半消息
+MQ -> MQ :特殊半消息队列
+end
+a -> a :执行业务逻辑
+a -> a :执行成功
+group 提交半消息
+a -> MQ :提交半消息
+MQ -> MQ :消息转移到普通队列
+end
+MQ -> b :消费消息
+@enduml

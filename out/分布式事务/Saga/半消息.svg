@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="2572.9167px" preserveAspectRatio="none" style="width:1677px;height:2572px;background:#FFFFFF;" version="1.1" viewBox="0 0 1677 2572" width="1677.0833px" zoomAndPan="magnify"><defs/><g><rect height="460.4085" style="stroke:#000000;stroke-width:7.8125;fill:none;" width="1294.2708" x="52.0833" y="716.4714"/><rect height="460.4085" style="stroke:#000000;stroke-width:7.8125;fill:none;" width="1429.6875" x="52.0833" y="1688.68"/><line style="stroke:#181818;stroke-width:2.6041666666666665;fill:none;stroke-dasharray:5.0,5.0;" x1="291.6667" x2="291.6667" y1="189.0462" y2="2389.3636"/><line style="stroke:#181818;stroke-width:2.6041666666666665;fill:none;stroke-dasharray:5.0,5.0;" x1="770.8333" x2="770.8333" y1="189.0462" y2="2389.3636"/><line style="stroke:#181818;stroke-width:2.6041666666666665;fill:none;stroke-dasharray:5.0,5.0;" x1="1455.7292" x2="1455.7292" y1="189.0462" y2="2389.3636"/><rect fill="#E2E2F0" height="157.7962" rx="13.0208" ry="13.0208" style="stroke:#181818;stroke-width:2.6041666666666665;" width="380.2083" x="104.1667" y="26.0417"/><text fill="#000000" font-family="sans-serif" font-size="72.9167" lengthAdjust="spacing" textLength="307.2917" x="140.625" y="130.1829">ServiceA</text><rect fill="#E2E2F0" height="157.7962" rx="13.0208" ry="13.0208" style="stroke:#181818;stroke-width:2.6041666666666665;" width="380.2083" x="104.1667" y="2384.1553"/><text fill="#000000" font-family="sans-serif" font-size="72.9167" lengthAdjust="spacing" textLength="307.2917" x="140.625" y="2488.2965">ServiceA</text><rect fill="#E2E2F0" height="157.7962" rx="13.0208" ry="13.0208" style="stroke:#181818;stroke-width:2.6041666666666665;" width="192.7083" x="677.0833" y="26.0417"/><text fill="#000000" font-family="sans-serif" font-size="72.9167" lengthAdjust="spacing" textLength="119.7917" x="713.5417" y="130.1829">MQ</text><rect fill="#E2E2F0" height="157.7962" rx="13.0208" ry="13.0208" style="stroke:#181818;stroke-width:2.6041666666666665;" width="192.7083" x="677.0833" y="2384.1553"/><text fill="#000000" font-family="sans-serif" font-size="72.9167" lengthAdjust="spacing" textLength="119.7917" x="713.5417" y="2488.2965">MQ</text><rect fill="#E2E2F0" height="157.7962" rx="13.0208" ry="13.0208" style="stroke:#181818;stroke-width:2.6041666666666665;" width="385.4167" x="1263.0208" y="26.0417"/><text fill="#000000" font-family="sans-serif" font-size="72.9167" lengthAdjust="spacing" textLength="312.5" x="1299.4792" y="130.1829">ServiceB</text><rect fill="#E2E2F0" height="157.7962" rx="13.0208" ry="13.0208" style="stroke:#181818;stroke-width:2.6041666666666665;" width="385.4167" x="1263.0208" y="2384.1553"/><text fill="#000000" font-family="sans-serif" font-size="72.9167" lengthAdjust="spacing" textLength="312.5" x="1299.4792" y="2488.2965">ServiceB</text><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="294.2708" x2="513.0208" y1="351.1963" y2="351.1963"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="513.0208" x2="513.0208" y1="351.1963" y2="418.9046"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="299.4792" x2="513.0208" y1="418.9046" y2="418.9046"/><polygon fill="#181818" points="351.5625,398.0713,299.4792,418.9046,351.5625,439.738,330.7292,418.9046" style="stroke:#181818;stroke-width:5.208333333333333;"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="270.8333" x="330.7292" y="324.8113">开启事务</text><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="294.2708" x2="513.0208" y1="570.638" y2="570.638"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="513.0208" x2="513.0208" y1="570.638" y2="638.3464"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="299.4792" x2="513.0208" y1="638.3464" y2="638.3464"/><polygon fill="#181818" points="351.5625,617.513,299.4792,638.3464,351.5625,659.1797,330.7292,638.3464" style="stroke:#181818;stroke-width:5.208333333333333;"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="406.25" x="330.7292" y="544.253">执行业务逻辑</text><path d="M52.0833,716.4714 L625,716.4714 L625,753.6214 L572.9167,805.7048 L52.0833,805.7048 L52.0833,716.4714 " fill="#EEEEEE" style="stroke:#000000;stroke-width:7.8125;"/><rect fill="none" height="460.4085" style="stroke:#000000;stroke-width:7.8125;" width="1294.2708" x="52.0833" y="716.4714"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" font-weight="bold" lengthAdjust="spacing" textLength="338.5417" x="130.2083" y="784.5281">发送半消息</text><polygon fill="#181818" points="710.9375,894.9382,763.0208,915.7715,710.9375,936.6048,731.7708,915.7715" style="stroke:#181818;stroke-width:5.208333333333333;"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="294.2708" x2="742.1875" y1="915.7715" y2="915.7715"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="338.5417" x="330.7292" y="889.3865">发送半消息</text><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="773.4375" x2="992.1875" y1="1067.5049" y2="1067.5049"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="992.1875" x2="992.1875" y1="1067.5049" y2="1135.2132"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="778.6458" x2="992.1875" y1="1135.2132" y2="1135.2132"/><polygon fill="#181818" points="830.7292,1114.3799,778.6458,1135.2132,830.7292,1156.0465,809.8958,1135.2132" style="stroke:#181818;stroke-width:5.208333333333333;"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="473.9583" x="809.8958" y="1041.1199">特殊半消息队列</text><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="294.2708" x2="513.0208" y1="1323.4049" y2="1323.4049"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="513.0208" x2="513.0208" y1="1323.4049" y2="1391.1133"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="299.4792" x2="513.0208" y1="1391.1133" y2="1391.1133"/><polygon fill="#181818" points="351.5625,1370.2799,299.4792,1391.1133,351.5625,1411.9466,330.7292,1391.1133" style="stroke:#181818;stroke-width:5.208333333333333;"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="406.25" x="330.7292" y="1297.02">执行业务逻辑</text><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="294.2708" x2="513.0208" y1="1542.8467" y2="1542.8467"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="513.0208" x2="513.0208" y1="1542.8467" y2="1610.555"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="299.4792" x2="513.0208" y1="1610.555" y2="1610.555"/><polygon fill="#181818" points="351.5625,1589.7217,299.4792,1610.555,351.5625,1631.3883,330.7292,1610.555" style="stroke:#181818;stroke-width:5.208333333333333;"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="270.8333" x="330.7292" y="1516.4617">执行成功</text><path d="M52.0833,1688.68 L625,1688.68 L625,1725.8301 L572.9167,1777.9134 L52.0833,1777.9134 L52.0833,1688.68 " fill="#EEEEEE" style="stroke:#000000;stroke-width:7.8125;"/><rect fill="none" height="460.4085" style="stroke:#000000;stroke-width:7.8125;" width="1429.6875" x="52.0833" y="1688.68"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" font-weight="bold" lengthAdjust="spacing" textLength="338.5417" x="130.2083" y="1756.7368">提交半消息</text><polygon fill="#181818" points="710.9375,1867.1468,763.0208,1887.9801,710.9375,1908.8135,731.7708,1887.9801" style="stroke:#181818;stroke-width:5.208333333333333;"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="294.2708" x2="742.1875" y1="1887.9801" y2="1887.9801"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="338.5417" x="330.7292" y="1861.5952">提交半消息</text><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="773.4375" x2="992.1875" y1="2039.7135" y2="2039.7135"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="992.1875" x2="992.1875" y1="2039.7135" y2="2107.4219"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="778.6458" x2="992.1875" y1="2107.4219" y2="2107.4219"/><polygon fill="#181818" points="830.7292,2086.5885,778.6458,2107.4219,830.7292,2128.2552,809.8958,2107.4219" style="stroke:#181818;stroke-width:5.208333333333333;"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="609.375" x="809.8958" y="2013.3286">消息转移到普通队列</text><polygon fill="#181818" points="1393.2292,2274.7803,1445.3125,2295.6136,1393.2292,2316.4469,1414.0625,2295.6136" style="stroke:#181818;stroke-width:5.208333333333333;"/><line style="stroke:#181818;stroke-width:5.208333333333333;" x1="773.4375" x2="1424.4792" y1="2295.6136" y2="2295.6136"/><text fill="#000000" font-family="sans-serif" font-size="67.7083" lengthAdjust="spacing" textLength="270.8333" x="809.8958" y="2269.2286">消费消息</text><!--MD5=[40e9b95cef4f35e4a60fe6e79aad1807]
+@startuml 半消息
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+participant ServiceA as a
+participant MQ
+participant ServiceB as b
+
+a -> a :开启事务
+a -> a :执行业务逻辑
+group 发送半消息
+a -> MQ :发送半消息
+MQ -> MQ :特殊半消息队列
+end
+a -> a :执行业务逻辑
+a -> a :执行成功
+group 提交半消息
+a -> MQ :提交半消息
+MQ -> MQ :消息转移到普通队列
+end
+MQ -> b :消费消息
+@enduml
+
+@startuml 半消息
+skinparam shadowing false
+skinparam dpi 500
+hide empty description
+
+participant ServiceA as a
+participant MQ
+participant ServiceB as b
+
+a -> a :开启事务
+a -> a :执行业务逻辑
+group 发送半消息
+a -> MQ :发送半消息
+MQ -> MQ :特殊半消息队列
+end
+a -> a :执行业务逻辑
+a -> a :执行成功
+group 提交半消息
+a -> MQ :提交半消息
+MQ -> MQ :消息转移到普通队列
+end
+MQ -> b :消费消息
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 18:55:52 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
