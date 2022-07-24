@@ -1,0 +1,54 @@
+@startuml 现状
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+actor 写入用户 as actorA
+actor 读取用户 as actorB
+rectangle 写入服务 as serviceA
+rectangle 读取服务 as serviceB
+database 数据库 as database {
+    rectangle 旧数据 as oldData
+}
+
+actorA -> serviceA : 1.写入数据
+serviceA -> oldData : 2.写入数据
+oldData -> serviceB : 3.读取数据
+serviceB -> actorB : 4.读取数据
+@enduml
+
+@startuml 灰度
+' 去除阴影
+skinparam shadowing false
+' 增大dpi 提高清晰度
+skinparam dpi 500
+hide empty description
+
+actor 写入用户 as actorA
+actor 读取用户 as actorB
+rectangle 写入服务 as serviceA
+rectangle 读取服务 as serviceB
+rectangle 灰度写入服务 as serviceGA
+rectangle 灰度读取服务 as serviceGB
+rectangle 网关 as gateway
+database 数据库 as database {
+    rectangle 旧数据 as oldData
+    rectangle 新数据 as newData
+}
+
+actorA -up-> gateway : 1.写入数据
+gateway -up-> serviceGA : 2.灰度写入数据
+gateway -up-> serviceA : 2.写入数据
+serviceA -up-> oldData : 3.写入数据
+serviceGA -up-> newData : 4.灰度写入新数据
+serviceGA -up-> oldData : 4.灰度写入旧数据
+oldData -down-> serviceGB : 5.灰度读取旧数据
+newData -down-> serviceGB : 5.灰度读取新数据
+oldData -down-> serviceB : 5.读取数据
+serviceB -down-> gateway : 6.读取数据
+serviceGB -down-> gateway : 6.读取数据
+gateway -down-> actorB : 7.读取数据
+
+@enduml
